@@ -23,6 +23,7 @@
                   <th>Created</th>
                   <th>Last update</th>
                   <th>Image</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +38,18 @@
                     <td>
                     <img src="{{asset('image/categories/'.$c->image)}}" style="width: 80px; height: 50px;">
                     </td>
+                    <td>
+                        <a href="{{route('categories.edit', $c->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{route('categories.destroy', $c->id)}}" class="btn btn-danger btn-sm"
+                        onclick="event.preventDefault();document.getElementById('category-form-delete').submit();">Delete</a>
+                    </td>
                     </tr>
+
+                    <form action="{{route('categories.destroy', $c->id)}}" method="post" id="category-form-delete" >
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" value="{{$c->id}}">
+                    </form>
                 @endforeach
 
                 </tfoot>

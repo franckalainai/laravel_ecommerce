@@ -37,15 +37,15 @@
           <a href="#"><i class="fa fa-link"></i> <span>Categories</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
           <li><a href="{{route('categories.index')}}">List</a></li>
-            <li><a href="#">Create</a></li>
+            <li><a href="{{route('categories.create')}}">Create</a></li>
           </ul>
         </li>
 
         <li class="treeview">
-            <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <a href="#"><i class="fa fa-link"></i> <span>Products</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="{{route('products.index')}}">List</a></li>
+            <li><a href="{{route('products.create')}}">Create</a></li>
             </ul>
         </li>
     </ul>
