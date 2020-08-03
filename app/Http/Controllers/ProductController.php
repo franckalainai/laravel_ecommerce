@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Product;
 use App\Model\Category;
+use App\Model\ProductGallery;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -47,8 +48,10 @@ class ProductController extends Controller
         $product->image('image', $product);
 
         if($product->save()){
-            return redirect()->route('products.index')->withStatus('Product was created successfully');
+           ProductGallery::imageGallery('imageGalleries', $product->id);
         }
+
+        return redirect()->route('products.index')->withStatus('Product was created successfully');
     }
 
     /**
@@ -71,7 +74,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::pluck('category_name', 'id');
-        return view('products.edit')->with(compact('categories', 'product'));
+        $imageGalleries = ProductGallery::where('product_id', $product->id)->get();
+        return view('products.edit')->with(compact('categories', 'product', 'imageGalleries'));
     }
 
     /**
@@ -104,6 +108,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         if($product->destroy(request()->id)){
+            ProductGallery::where('product_id', request()->id)->delete();
+
             return redirect()->route('products.index')->withStatus('Product was deleted successfully');
         }
     }

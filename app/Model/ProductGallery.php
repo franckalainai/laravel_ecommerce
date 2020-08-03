@@ -29,7 +29,24 @@ class ProductGallery extends Model
                 $newfile->gallery_image = $filename;
 
                 if($newfile->save()){
-                    $file->move('image/categories', $filename);
+                    $file->move('image/galleries', $filename);
+                }
+            }
+        }
+    }
+
+    public static function imageGalleryUpdate($filename, $product_id){
+        if(request()->hasfile($filename)){
+
+            foreach(request()->$filename as $file){
+
+                $filename = rand().'.'.$file->getClientOriginalExtension();
+                $newfile = new ProductGallery();
+                $newfile->product_id = $product_id;
+                $newfile->gallery_image = $filename;
+
+                if($newfile->save()){
+                    $file->move('image/galleries', $filename);
                 }
             }
         }

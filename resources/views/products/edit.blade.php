@@ -4,7 +4,7 @@
 <section class="content">
     <div class="row">
       <!-- left column -->
-      <div class="col-md-12">
+      <div class="col-xs-6">
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
@@ -51,6 +51,11 @@
                 <label for="exampleInputFile">Image</label>
                 <input type="file" name="image" id="image">
               </div>
+
+              <div class="form-group">
+                <label for="exampleInputFile">Image Gallery</label>
+                <input type="file" name="imageGalleries[]" id="imageGalleries" multiple placeholder="image gallery">
+              </div>
             </div>
             <!-- /.box-body -->
 
@@ -60,6 +65,14 @@
           </form>
         </div>
         <!-- /.box -->
+      </div>
+
+      <div class="col-xs-6">
+        <ul class="list-group">
+        @foreach($imageGalleries as $key => $image)
+        <li class="list-group-item"><img src="{{asset('image/galleries/'.$image->gallery_image)}}" class="img-thumbnail" style="width: 60px; height: 60px;"></li>
+        @endforeach
+        </ul>
       </div>
     </div>
 </section>

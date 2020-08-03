@@ -9,7 +9,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Products Informations</h3>
-            <a href="{{route('products.create')}}" class="btn btn-primary btn-sm pull-right">New Category</a>
+            <a href="{{route('products.create')}}" class="btn btn-primary btn-sm pull-right">New Product</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

@@ -46,9 +46,15 @@
                 <label for="exampleInputPassword1">Description</label>
                 <input type="text" name="description" id="description" value="{{old('descrition')}}" class="form-control" placeholder="Description">
               </div>
+
               <div class="form-group">
                 <label for="exampleInputFile">Image</label>
                 <input type="file" name="image" id="image" value="{{old('image')}}" placeholder="image">
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputFile">Image Gallery</label>
+                <input type="file" name="imageGalleries[]" id="imageGalleries" multiple placeholder="image gallery">
               </div>
             </div>
             <!-- /.box-body -->
