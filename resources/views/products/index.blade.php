@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style type="text/css">
+    .modal.and.carousel {
+        position: fixed;
+      }
+    </style>
 
 
     <!-- Main content -->
@@ -43,7 +48,6 @@
                     <td>{{$p->is_active}}</td>
                     <td>{{$p->created_at}}</td>
                     <td>{{$p->updated_at}}</td>
-                    <td>{{$p->image}}</td>
                     <td>
                     <img src="{{asset('image/products/'.$p->image)}}" style="width: 80px; height: 50px;">
                     </td>
@@ -51,14 +55,17 @@
                         <a href="{{route('products.edit', $p->id)}}" class="btn btn-primary btn-sm">Edit</a>
                         <a href="{{route('products.destroy', $p->id)}}" class="btn btn-danger btn-sm"
                         onclick="event.preventDefault();document.getElementById('product-form-delete').submit();">Delete</a>
+                        <a href="#lightbox" data-toggle="modal" data-id="{{$p->id}}" class="btn btn-info btn-sm view_image">View Image</a>
+
+                        <form action="{{route('products.destroy', $p->id)}}" method="post" id="product-form-delete" >
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="id" value="{{$p->id}}">
+                        </form>
                     </td>
                     </tr>
 
-                    <form action="{{route('products.destroy', $p->id)}}" method="post" id="product-form-delete" >
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="id" value="{{$p->id}}">
-                    </form>
+
                 @endforeach
 
                 </tfoot>
@@ -75,5 +82,19 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <div class="modal fade and carousel slide" id="lightbox">
+  </div>
+@endsection
+
+@section('script')
+  <script>
+      $('.view_image').on('click', function(){
+          product_id = $(this).data('id');
+          $.get("{{route('products.index')}}", {product_id:product_id}, function(data){
+            console.log(data);
+            $('#lightbox').html(data);
+          });
+      })
+  </script>
 @endsection
 

@@ -16,8 +16,17 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if(request()->ajax()){
+            return response($this->viewImage(request()->product_id));
+        }
+
         $products = Product::with(['category'])->orderBy('id', 'desc')->get();
         return view('products.index')->with(compact('products', $products));
+    }
+
+    public function viewImage($product_id){
+        $imageGalleries = ProductGallery::where('product_id', $product_id)->get();
+        return view('products.viewImageGallery')->with(compact('imageGalleries'));
     }
 
     /**
@@ -95,8 +104,10 @@ class ProductController extends Controller
         $product->image('image', $product);
 
         if($product->save()){
-            return redirect()->route('products.index')->withStatus('Product was updated successfully');
+
         }
+
+        return redirect()->route('products.index')->withStatus('Product was updated successfully');
     }
 
     /**
