@@ -48,6 +48,16 @@
             <li><a href="{{route('products.create')}}">Create</a></li>
             </ul>
         </li>
+
+        <li class="treeview">
+            <a href="#"><i class="fa fa-link"></i> <span>Manage</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+            <li><a href="{{route('color.index')}}">Color List</a></li>
+            <li><a href="{{route('color.create')}}">Create Color</a></li>
+            <li><a href="{{route('status.index')}}">Status List</a></li>
+            <li><a href="{{route('status.create')}}">Create Status</a></li>
+            </ul>
+        </li>
     </ul>
       <!-- /.sidebar-menu -->
     </section>
