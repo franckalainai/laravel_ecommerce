@@ -26,4 +26,9 @@ class Category extends Model
             $category->image = $filename;
         }
     }
+
+    //------------Product join with category---------
+    public function products(){
+        return $this->hasMany("App\Model\Product");
+    }
 }

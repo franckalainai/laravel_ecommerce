@@ -37,6 +37,26 @@ class ManageController extends Controller
         }
     }
 
+    public function restoreColor(){
+        $colors = Color::onlyTrashed()->get();
+
+        return view('manages.color.restore')->with(compact('colors'));
+    }
+
+    public function postRestoreColor($id=null){
+        if($id!=null){
+            Color::onlyTrashed()->where('id', $id)->restore();
+        }else{
+            if(isset(request()->id)){
+                Color::onlyTrashed()->whereIn('id', request()->id)->restore();
+            }else{
+                return back()->withStatus('Please check box to restore');
+            }
+        }
+
+        return back();
+    }
+
     //--------------Status------------
 
     public function indexStatus(){

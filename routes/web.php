@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontEndController@index')->name('shop.cart.index');
 
 Auth::routes();
 
@@ -32,6 +30,9 @@ Route::match(['get', 'post'], '/color/create', 'ManageController@createColor')->
 Route::get('/color/edit/{id}', 'ManageController@editColor')->name('color.edit');
 Route::post('/color/store', 'ManageController@storeColor')->name('color.store');
 Route::get('/color/destroy/{id}', 'ManageController@destroyColor')->name('color.destroy');
+Route::get('/color/restore', 'ManageController@restoreColor')->name('color.restore');
+
+Route::get('/color/restore/info/{id}', 'ManageController@postRestoreColor')->name('color.restore.info');
 
 Route::get('/status', 'ManageController@indexStatus')->name('status.index');
 Route::match(['get', 'post'],'/status/create', 'ManageController@createStatus')->name('status.create');
