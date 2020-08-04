@@ -52,7 +52,7 @@
                     </form>
                 @endforeach
 
-                </tfoot>
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->

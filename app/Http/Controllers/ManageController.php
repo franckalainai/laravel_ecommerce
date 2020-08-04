@@ -9,11 +9,18 @@ use App\Model\Status;
 class ManageController extends Controller
 {
     public function indexColor(){
-        return view('manages.color.index');
+        $colors = Color::all();
+        return view('manages.color.index')->with(compact('colors'));
     }
 
-    public function storeColor(){
+    public function createColor(){
+        return view('manages.color.create');
+    }
 
+    public function storeColor(Request $request){
+        if(Color::create($request->all())){
+            return redirect()->route('color.index');
+        }
     }
 
     public function editColor($id){
@@ -25,17 +32,27 @@ class ManageController extends Controller
     }
 
     public function destroyColor($id){
-
+        if(Color::destroy($id)){
+            return back();
+        }
     }
 
     //--------------Status------------
 
     public function indexStatus(){
-        return view('manages.status.index');
+        $status = Status::all();
+        return view('manages.status.index')->with(compact('status'));
     }
 
-    public function storeStatus(){
 
+    public function createStatus(){
+        return view('manages.status.create');
+    }
+
+    public function storeStatus(Request $request){
+        if(Status::create($request->all())){
+            return redirect()->route('status.index');
+        }
     }
 
     public function editStatus($id){
@@ -47,6 +64,8 @@ class ManageController extends Controller
     }
 
     public function destroyStatus($id){
-
+        if(Status::destroy($id)){
+            return back();
+        }
     }
 }
